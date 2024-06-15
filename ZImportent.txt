@@ -1,0 +1,110 @@
+<View style={styles.prouctDesingContainer}>
+        <Text style={styles.prouctDesiginTxt}>{Strings.prouctDesing}</Text>
+        <View style={styles.ratingsContainer}>
+          <Text style={styles.ratingsTxt}>5.0</Text>
+          {[1, 2, 3, 4, 5].map(index => (
+            <VectorIcon
+              key={index}
+              type="FontAwesome"
+              name="star"
+              size={17}
+              color={Colors.PurpleDark}
+            />
+          ))}
+        </View>
+      </View>
+
+      2 ********************************
+       <LinearGradient
+      start={{x: 0, y: 0.4}}
+      end={{x: 1, y: 0}}
+      colors={
+        colors || [Colors.PurpleLight, Colors.PurpleLight, Colors.PurpleDark]
+      }
+      style={{...styles.linearGradient, ...linearGradientStyle}}>
+      {children}
+    </LinearGradient>
+
+
+    ###########################
+    const SlectedApi = [
+  {
+    id: 1,
+    name: 'All Course',
+  },
+  {
+    id: 2,
+    name: 'Popular ',
+  },
+  {
+    id: 3,
+    name: 'Newest',
+  },
+];
+// varables
+
+export default function Home() {
+  const [heart, setHeart] = useState();
+  const [isselected, setIsSelected] = useState(SlectedApi[0]);
+
+
+  <View
+          style={{
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            paddingHorizontal: wp(8),
+          }}>
+          {SlectedApi.map(item => (
+            <SelecteButton
+              key={item.id}
+              title={item.name}
+              colors={
+                item.id == isselected?.id
+                  ? ['green', 'green', 'green']
+                  : ['red', 'red', 'red']
+              }
+              onPress={() => {
+                setIsSelected(item);
+              }}
+            />
+          ))}
+        </View>
+
+        <View style={styles.setlectdCourse}>
+          {isselected.id == 1 ? (
+            // <FlatList
+            //   numColumns={2}
+            //   data={AllCourses}
+            //   keyExtractor={item => item.id}
+            //   renderItem={({item}) => (
+            //     <View
+            //       style={{
+            //         flexDirection: 'row',
+            //         justifyContent: 'space-between',
+            //         alignItems: 'center',
+            //         alignSelf: 'center',
+            //         flex: 1,
+            //       }}>
+            //       <AllCourse image={item.image} />
+            //     </View>
+            //   )}
+            // />
+            <View
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {AllCourses.map((item, index) => (
+                <View
+                  style={{
+                    width: '50%',
+                  }}
+                  key={index}>
+                  <AllCourse image={item.image} />
+                </View>
+              ))}
+            </View>
+          ) : null}
+          {isselected.id == 2 ? <Popular /> : null}
+          {isselected.id == 3 ? <Newest /> : null}
+        </View>
